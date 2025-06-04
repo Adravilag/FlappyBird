@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Flappy Bird en HTML5</title>
+  <style>
+    canvas { background: #70c5ce; display: block; margin: auto; }
+  </style>
+</head>
+<body>
+  <canvas id="game" width="288" height="512"></canvas>
+  <script>
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+    const birdImg = new Image();
+    const bgImg = new Image();
+    const fgImg = new Image();
+    const pipeNorth = new Image();
+    const pipeSouth = new Image();
+    birdImg.src = 'https://i.imgur.com/Qp0UzEw.png';
+    bgImg.src = 'https://i.imgur.com/OdZJz1N.png';
+    fgImg.src = 'https://i.imgur.com/gpvnX9G.png';
+    pipeNorth.src = 'https://i.imgur.com/9sAG3cz.png';
+    pipeSouth.src = 'https://i.imgur.com/Hjr3Q1p.png';
+
+    let gap = 85;
+    let constant;
+    let bX = 50;
+    let bY = 150;
+    let gravity = 1.5;
+    let score = 0;
+
+    document.addEventListener('keydown', moveUp);
+    function moveUp() { bY -= 25; }
+
+    const pipes = [];
+    pipes[0] = { x: canvas.width, y: 0 };
+
+    function draw() {
+      ctx.drawImage(bgImg, 0, 0);
+      for (let i = 0; i < pipes.length; i++) {
+        constant = pipeNorth.height + gap;
+        ctx.drawImage(pipeNorth, pipes[i].x, pipes[i].y);
+        ctx.drawImage(pipeSouth, pipes[i].x, pipes[i].y + constant);
+        pipes[i].x--;
+        if (pipes[i].x == 125) {
+          pipes.push({ x: canvas.width, y: Math.floor(Math.random() * pipeNorth.height) - pipeNorth.height });
+        }
+        if (bX + birdImg.width >= pipes[i].x && bX <= pipes[i].x + pipeNorth.width && (bY <= pipes[i].y + pipeNorth.height || bY + birdImg.height >= pipes[i].y + constant) || bY + birdImg.height >= canvas.height - fgImg.height) {
+          location.reload();
+        }
+        if (pipes[i].x == 5) { score++; }
+      }
+      ctx.drawImage(fgImg, 0, canvas.height - fgImg.height);
+      ctx.drawImage(birdImg, bX, bY);
+      bY += gravity;
+      ctx.fillStyle = '#000';
+      ctx.font = '20px Verdana';
+      ctx.fillText('Puntuación: ' + score, 10, canvas.height - 20);
+      requestAnimationFrame(draw);
+    }
+    pipeSouth.onload = draw;
+  </script>
+</body>
+</html>
+
