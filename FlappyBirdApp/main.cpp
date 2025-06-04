@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "DEFINITIONS.hpp"
+#include <cstdlib>
 
 /**
 * HIDE CONSOLE WINDOW

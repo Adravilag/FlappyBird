@@ -17,7 +17,7 @@
 #define PIPE_DOWN_FILEPATH "Resources/res/PipeDown.png"
 #define PIPE_SCORING_PIPE_FILEPATH "Resources/res/InvisibleScoringPipe.png"
 
-#define LAND_FILEPATH "Resources/res/Land.png"
+#define LAND_FILEPATH "Resources/res/land.png"
 
 #define BIRD_FRAME_1_FILEPATH "Resources/res/bird-01.png"
 #define BIRD_FRAME_2_FILEPATH "Resources/res/bird-02.png"
@@ -67,7 +67,7 @@ enum GameStates
 
 #define FLASH_SPEED 1500.f
 
-#define TIME_BEFORE_GAME_OVER_APPERS 1.5f
+#define TIME_BEFORE_GAME_OVER_APPEARS 1.5f
 
 #define BRONZE_MEDAL_SCORE 0
 #define SILVER_MEDAL_SCORE 5
